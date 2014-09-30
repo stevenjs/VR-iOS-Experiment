@@ -13,6 +13,11 @@
 		05ADC3CB19DA200700B0EC7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3CA19DA200700B0EC7A /* Images.xcassets */; };
 		05ADC3CE19DA200700B0EC7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3CC19DA200700B0EC7A /* LaunchScreen.xib */; };
 		05ADC3DA19DA200700B0EC7A /* VR_iOS_ExperimentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ADC3D919DA200700B0EC7A /* VR_iOS_ExperimentTests.swift */; };
+		05ADC3E619DA20B000B0EC7A /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ADC3E519DA20B000B0EC7A /* SceneKit.framework */; };
+		05ADC3E819DA20B700B0EC7A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ADC3E719DA20B700B0EC7A /* CoreMotion.framework */; };
+		05ADC3EB19DA21CB00B0EC7A /* FireParticles.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3E919DA21CB00B0EC7A /* FireParticles.scnp */; };
+		05ADC3EC19DA21CB00B0EC7A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3EA19DA21CB00B0EC7A /* spark.png */; };
+		05ADC3EE19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,11 @@
 		05ADC3D319DA200700B0EC7A /* VR-iOS-ExperimentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VR-iOS-ExperimentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ADC3D819DA200700B0EC7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05ADC3D919DA200700B0EC7A /* VR_iOS_ExperimentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VR_iOS_ExperimentTests.swift; sourceTree = "<group>"; };
+		05ADC3E519DA20B000B0EC7A /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		05ADC3E719DA20B700B0EC7A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		05ADC3E919DA21CB00B0EC7A /* FireParticles.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FireParticles.scnp; sourceTree = "<group>"; };
+		05ADC3EA19DA21CB00B0EC7A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "500px-Checkerboard_pattern.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05ADC3E819DA20B700B0EC7A /* CoreMotion.framework in Frameworks */,
+				05ADC3E619DA20B000B0EC7A /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +71,8 @@
 		05ADC3B519DA200700B0EC7A = {
 			isa = PBXGroup;
 			children = (
+				05ADC3E719DA20B700B0EC7A /* CoreMotion.framework */,
+				05ADC3E519DA20B000B0EC7A /* SceneKit.framework */,
 				05ADC3C019DA200700B0EC7A /* VR-iOS-Experiment */,
 				05ADC3D619DA200700B0EC7A /* VR-iOS-ExperimentTests */,
 				05ADC3BF19DA200700B0EC7A /* Products */,
@@ -77,12 +91,15 @@
 		05ADC3C019DA200700B0EC7A /* VR-iOS-Experiment */ = {
 			isa = PBXGroup;
 			children = (
+				05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */,
 				05ADC3C319DA200700B0EC7A /* AppDelegate.swift */,
 				05ADC3C519DA200700B0EC7A /* ViewController.swift */,
 				05ADC3C719DA200700B0EC7A /* Main.storyboard */,
 				05ADC3CA19DA200700B0EC7A /* Images.xcassets */,
 				05ADC3CC19DA200700B0EC7A /* LaunchScreen.xib */,
 				05ADC3C119DA200700B0EC7A /* Supporting Files */,
+				05ADC3E919DA21CB00B0EC7A /* FireParticles.scnp */,
+				05ADC3EA19DA21CB00B0EC7A /* spark.png */,
 			);
 			path = "VR-iOS-Experiment";
 			sourceTree = "<group>";
@@ -193,6 +210,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				05ADC3C919DA200700B0EC7A /* Main.storyboard in Resources */,
+				05ADC3EC19DA21CB00B0EC7A /* spark.png in Resources */,
+				05ADC3EB19DA21CB00B0EC7A /* FireParticles.scnp in Resources */,
+				05ADC3EE19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png in Resources */,
 				05ADC3CE19DA200700B0EC7A /* LaunchScreen.xib in Resources */,
 				05ADC3CB19DA200700B0EC7A /* Images.xcassets in Resources */,
 			);

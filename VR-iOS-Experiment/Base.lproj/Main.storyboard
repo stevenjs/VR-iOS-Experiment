@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="VR_iOS_Experiment" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,8 +16,33 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fL-YP-b2W">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </sceneKitView>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2H-Vr-yQc">
+                                <rect key="frame" x="300" y="0.0" width="300" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I2H-Vr-yQc" firstAttribute="leading" secondItem="7fL-YP-b2W" secondAttribute="trailing" id="1u7-z9-1VJ"/>
+                            <constraint firstItem="I2H-Vr-yQc" firstAttribute="leading" secondItem="7fL-YP-b2W" secondAttribute="trailing" id="6uA-YD-e4G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I2H-Vr-yQc" secondAttribute="trailing" constant="-16" id="AlW-s4-mkT"/>
+                            <constraint firstItem="7fL-YP-b2W" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="I2E-9b-uhs"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="7fL-YP-b2W" secondAttribute="bottom" id="OsH-GA-gW1"/>
+                            <constraint firstItem="7fL-YP-b2W" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="hc0-vx-HM9"/>
+                            <constraint firstItem="I2H-Vr-yQc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="jjn-y1-rb5"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="I2H-Vr-yQc" secondAttribute="bottom" id="nip-Kf-w3J"/>
+                            <constraint firstItem="7fL-YP-b2W" firstAttribute="width" secondItem="I2H-Vr-yQc" secondAttribute="width" id="szU-bS-X87"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="leftSceneView" destination="7fL-YP-b2W" id="d0L-dN-PBi"/>
+                        <outlet property="rightSceneView" destination="I2H-Vr-yQc" id="DAC-jt-GVX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
