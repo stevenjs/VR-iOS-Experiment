@@ -1,15 +1,20 @@
 # VR-iOS-Experiment
 
-A simple Virtual Reality proof-of-concept app written in Swift for
-iOS 8. SceneKit is used to generate a scene containing a bouncing
-ball, and a flame particle effect. Core Motion is used to track
-the user's head movements. 
+A simple Virtual Reality proof-of-concept app written in Swift for iOS 8.
+SceneKit is used to generate a scene containing a bouncing 
+[Boing Ball](https://en.wikipedia.org/wiki/Amiga) with a flame particle
+effect. Two `SCNView` views are used to create a stereoscopic view of the
+scene. Core Motion is used to track the user's head movements as they look
+around.  
+
+![Screen Shot](screenshot.png "Screen Shot")
 
 You'll need some kind of head-mount (maybe 
-[Google Cardboard](http://en.wikipedia.org/wiki/Google_Cardboard)?)
-or a pair of loupes, and an iPhone 6 (smaller iPhones aren't big
-enough in this author's opinion.)
-
+[Google Cardboard](http://en.wikipedia.org/wiki/Google_Cardboard) or
+a [Stooksy VR-Spektiv](http://www.stooksy.com/)?)
+or a pair of [loupes](https://en.wikipedia.org/wiki/Loupe), and, obviously,
+an [iPhone](https://www.apple.com/iphone-6/).
+ 
 ### License
 
 **VR-iOS-Experiment Copyright © 2014 Steven Saunders**
