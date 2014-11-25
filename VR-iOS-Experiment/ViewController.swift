@@ -10,6 +10,14 @@ import UIKit
 import SceneKit
 import CoreMotion
 
+func degreesToRadians(degrees: Float) -> Float {
+    return (degrees * Float(M_PI)) / 180.0
+}
+
+func radiansToDegrees(radians: Float) -> Float {
+    return (180.0/Float(M_PI)) * radians
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet var leftSceneView : SCNView?
@@ -45,11 +53,24 @@ class ViewController: UIViewController {
         rightCameraNode.camera = rightCamera
         rightCameraNode.position = SCNVector3(x: 0.5, y: 0, z: 0)
         
-        let cameraRootNode = SCNNode()
-        cameraRootNode.addChildNode(leftCameraNode)
-        cameraRootNode.addChildNode(rightCameraNode)
+        let camerasNode = SCNNode()
+        camerasNode.addChildNode(leftCameraNode)
+        camerasNode.addChildNode(rightCameraNode)
         
-        scene.rootNode.addChildNode(cameraRootNode)
+        // The user will be holding their device up (i.e. 90 degrees roll from a flat orientation)
+        // so roll the cameras by -90 degrees to orient the view correctly.
+        camerasNode.eulerAngles = SCNVector3Make(degreesToRadians(-90.0), 0, 0)
+        
+        let cameraRollNode = SCNNode()
+        cameraRollNode.addChildNode(camerasNode)
+        
+        let cameraPitchNode = SCNNode()
+        cameraPitchNode.addChildNode(cameraRollNode)
+        
+        let cameraYawNode = SCNNode()
+        cameraYawNode.addChildNode(cameraPitchNode)
+        
+        scene.rootNode.addChildNode(cameraYawNode)
         
         leftSceneView?.pointOfView = leftCameraNode
         rightSceneView?.pointOfView = rightCameraNode
@@ -112,16 +133,19 @@ class ViewController: UIViewController {
         // Respond to user head movement
         motionManager = CMMotionManager()
         motionManager?.deviceMotionUpdateInterval = 1.0 / 60.0
-        motionManager?.startDeviceMotionUpdatesToQueue(
-            NSOperationQueue.mainQueue(),
+        motionManager?.startDeviceMotionUpdatesUsingReferenceFrame(
+            CMAttitudeReferenceFrameXArbitraryZVertical,
+            toQueue: NSOperationQueue.mainQueue(),
             withHandler: { (motion: CMDeviceMotion!, error: NSError!) -> Void in
                 
                 let currentAttitude = motion.attitude
+                let roll = Float(currentAttitude.roll)
+                let pitch = Float(currentAttitude.pitch)
+                let yaw = Float(currentAttitude.yaw)
                 
-                cameraRootNode.eulerAngles = SCNVector3Make(
-                    Float(currentAttitude.roll) - (90 / 180*Float(M_PI)),
-                    Float(currentAttitude.yaw),
-                    Float(currentAttitude.pitch))
+                cameraRollNode.eulerAngles = SCNVector3Make(roll, 0.0, 0.0)
+                cameraPitchNode.eulerAngles = SCNVector3Make(0.0, 0.0, pitch)
+                cameraYawNode.eulerAngles = SCNVector3Make(0.0, yaw, 0.0)
         })
     }
     
