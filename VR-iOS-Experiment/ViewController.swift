@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(boingBallNode)
         
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "500px-Checkerboard_pattern.png")
+        material.diffuse.contents = UIImage(named: "checkerboard_pattern.png")
         material.specular.contents = UIColor.whiteColor()
         material.shininess = 1.0
         boingBall.materials = [ material ]

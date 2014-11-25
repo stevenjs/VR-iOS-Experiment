@@ -17,7 +17,7 @@
 		05ADC3E819DA20B700B0EC7A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ADC3E719DA20B700B0EC7A /* CoreMotion.framework */; };
 		05ADC3EB19DA21CB00B0EC7A /* FireParticles.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3E919DA21CB00B0EC7A /* FireParticles.scnp */; };
 		05ADC3EC19DA21CB00B0EC7A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3EA19DA21CB00B0EC7A /* spark.png */; };
-		05ADC3EE19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */; };
+		05ADC3EE19DA25A600B0EC7A /* checkerboard_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ADC3ED19DA25A600B0EC7A /* checkerboard_pattern.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		05ADC3E719DA20B700B0EC7A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		05ADC3E919DA21CB00B0EC7A /* FireParticles.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FireParticles.scnp; sourceTree = "<group>"; };
 		05ADC3EA19DA21CB00B0EC7A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "500px-Checkerboard_pattern.png"; sourceTree = "<group>"; };
+		05ADC3ED19DA25A600B0EC7A /* checkerboard_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerboard_pattern.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 		05ADC3C019DA200700B0EC7A /* VR-iOS-Experiment */ = {
 			isa = PBXGroup;
 			children = (
-				05ADC3ED19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png */,
+				05ADC3ED19DA25A600B0EC7A /* checkerboard_pattern.png */,
 				05ADC3C319DA200700B0EC7A /* AppDelegate.swift */,
 				05ADC3C519DA200700B0EC7A /* ViewController.swift */,
 				05ADC3C719DA200700B0EC7A /* Main.storyboard */,
@@ -212,7 +212,7 @@
 				05ADC3C919DA200700B0EC7A /* Main.storyboard in Resources */,
 				05ADC3EC19DA21CB00B0EC7A /* spark.png in Resources */,
 				05ADC3EB19DA21CB00B0EC7A /* FireParticles.scnp in Resources */,
-				05ADC3EE19DA25A600B0EC7A /* 500px-Checkerboard_pattern.png in Resources */,
+				05ADC3EE19DA25A600B0EC7A /* checkerboard_pattern.png in Resources */,
 				05ADC3CE19DA200700B0EC7A /* LaunchScreen.xib in Resources */,
 				05ADC3CB19DA200700B0EC7A /* Images.xcassets in Resources */,
 			);
@@ -425,6 +425,7 @@
 				05ADC3DF19DA200700B0EC7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05ADC3E019DA200700B0EC7A /* Build configuration list for PBXNativeTarget "VR-iOS-ExperimentTests" */ = {
 			isa = XCConfigurationList;
@@ -433,6 +434,7 @@
 				05ADC3E219DA200700B0EC7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
