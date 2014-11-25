@@ -126,9 +126,10 @@ class ViewController: UIViewController {
         
         boingBallNode.addAnimation(animation, forKey: "bounce")
         
-        // Fire Particle System, initially to the viewer's right
+        // Fire Particle System, attached to the boing ball
         let fire = SCNParticleSystem(named: "FireParticles", inDirectory: nil)
-        scene.addParticleSystem(fire, withTransform: SCNMatrix4MakeTranslation(10, 0, 0))
+        fire.emitterShape = boingBall
+        boingBallNode.addParticleSystem(fire)
         
         // Respond to user head movement
         motionManager = CMMotionManager()
