@@ -18,12 +18,15 @@ func radiansToDegrees(radians: Float) -> Float {
     return (180.0/Float(M_PI)) * radians
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SCNSceneRendererDelegate {
     
     @IBOutlet var leftSceneView : SCNView?
     @IBOutlet var rightSceneView : SCNView?
     
     var motionManager : CMMotionManager?
+    var cameraRollNode : SCNNode?
+    var cameraPitchNode : SCNNode?
+    var cameraYawNode : SCNNode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,27 +36,24 @@ class ViewController: UIViewController {
         
         // Create Scene
         var scene = SCNScene()
+        
         leftSceneView?.scene = scene
         rightSceneView?.scene = scene
         
         // Create cameras
         let leftCamera = SCNCamera()
-        leftCamera.xFov = 45
-        leftCamera.yFov = 45
-        
         let rightCamera = SCNCamera()
-        rightCamera.xFov = 45
-        rightCamera.yFov = 45
-        
+
         let leftCameraNode = SCNNode()
         leftCameraNode.camera = leftCamera
-        leftCameraNode.position = SCNVector3(x: -0.5, y: 0, z: 0)
+        leftCameraNode.position = SCNVector3(x: -0.5, y: 0.0, z: 0.0)
         
         let rightCameraNode = SCNNode()
         rightCameraNode.camera = rightCamera
-        rightCameraNode.position = SCNVector3(x: 0.5, y: 0, z: 0)
+        rightCameraNode.position = SCNVector3(x: 0.5, y: 0.0, z: 0.0)
         
         let camerasNode = SCNNode()
+        camerasNode.position = SCNVector3(x: 0.0, y:0.0, z:-3.0)
         camerasNode.addChildNode(leftCameraNode)
         camerasNode.addChildNode(rightCameraNode)
         
@@ -61,16 +61,16 @@ class ViewController: UIViewController {
         // so roll the cameras by -90 degrees to orient the view correctly.
         camerasNode.eulerAngles = SCNVector3Make(degreesToRadians(-90.0), 0, 0)
         
-        let cameraRollNode = SCNNode()
-        cameraRollNode.addChildNode(camerasNode)
+        cameraRollNode = SCNNode()
+        cameraRollNode!.addChildNode(camerasNode)
         
-        let cameraPitchNode = SCNNode()
-        cameraPitchNode.addChildNode(cameraRollNode)
+        cameraPitchNode = SCNNode()
+        cameraPitchNode!.addChildNode(cameraRollNode!)
         
-        let cameraYawNode = SCNNode()
-        cameraYawNode.addChildNode(cameraPitchNode)
+        cameraYawNode = SCNNode()
+        cameraYawNode!.addChildNode(cameraPitchNode!)
         
-        scene.rootNode.addChildNode(cameraYawNode)
+        scene.rootNode.addChildNode(cameraYawNode!)
         
         leftSceneView?.pointOfView = leftCameraNode
         rightSceneView?.pointOfView = rightCameraNode
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         // Create boing ball
         let boingBall = SCNSphere(radius: 1.0)
         let boingBallNode = SCNNode(geometry: boingBall)
-        boingBallNode.position = SCNVector3(x: 0, y: 3, z: -10)
+        boingBallNode.position = SCNVector3(x: 0, y: 3, z: -7)
         scene.rootNode.addChildNode(boingBallNode)
         
         let material = SCNMaterial()
@@ -116,9 +116,14 @@ class ViewController: UIViewController {
         material.shininess = 1.0
         boingBall.materials = [ material ]
         
-        // Make it bounce
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.byValue = NSValue(SCNVector3: SCNVector3(x: 0, y: -3.05, z: 0))
+        // Fire Particle System, attached to the boing ball
+        let fire = SCNParticleSystem(named: "FireParticles", inDirectory: nil)
+        fire.emitterShape = boingBall
+        boingBallNode.addParticleSystem(fire)
+        
+        // Make the ball bounce
+        let animation = CABasicAnimation(keyPath: "position.y")
+        animation.byValue = -3.05
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         animation.autoreverses = true
         animation.repeatCount = Float.infinity
@@ -126,28 +131,36 @@ class ViewController: UIViewController {
         
         boingBallNode.addAnimation(animation, forKey: "bounce")
         
-        // Fire Particle System, attached to the boing ball
-        let fire = SCNParticleSystem(named: "FireParticles", inDirectory: nil)
-        fire.emitterShape = boingBall
-        boingBallNode.addParticleSystem(fire)
+        // Make the camera move back and forth
+        let camera_anim = CABasicAnimation(keyPath: "position.y")
+        camera_anim.byValue = 12.0
+        camera_anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        camera_anim.autoreverses = true
+        camera_anim.repeatCount = Float.infinity
+        camera_anim.duration = 2.0
+        
+        camerasNode.addAnimation(camera_anim, forKey: "camera_motion")
         
         // Respond to user head movement
         motionManager = CMMotionManager()
         motionManager?.deviceMotionUpdateInterval = 1.0 / 60.0
-        motionManager?.startDeviceMotionUpdatesUsingReferenceFrame(
-            CMAttitudeReferenceFrame.XArbitraryZVertical,
-            toQueue: NSOperationQueue.mainQueue(),
-            withHandler: { (motion: CMDeviceMotion!, error: NSError!) -> Void in
-                
-                let currentAttitude = motion.attitude
-                let roll = Float(currentAttitude.roll)
-                let pitch = Float(currentAttitude.pitch)
-                let yaw = Float(currentAttitude.yaw)
-                
-                cameraRollNode.eulerAngles = SCNVector3Make(roll, 0.0, 0.0)
-                cameraPitchNode.eulerAngles = SCNVector3Make(0.0, 0.0, pitch)
-                cameraYawNode.eulerAngles = SCNVector3Make(0.0, yaw, 0.0)
-        })
+        motionManager?.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrame.XArbitraryZVertical)
+        
+        leftSceneView?.delegate = self
+        
+        leftSceneView?.playing = true
+        rightSceneView?.playing = true
+    }
+    
+    func renderer(aRenderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval)
+    {
+        if let mm = motionManager, let motion = mm.deviceMotion {
+            let currentAttitude = motion.attitude
+    
+            cameraRollNode!.eulerAngles.x = Float(currentAttitude.roll)
+            cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
+            cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
+        }
     }
     
     override func didReceiveMemoryWarning() {
